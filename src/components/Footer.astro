@@ -1,0 +1,55 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-softGray mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4">
+        <h3 class="font-serif text-xl text-secondary">Drey's Vault</h3>
+        <p class="text-gray-600">Sharing life's beautiful moments through vlogs, music, books, and crafts.</p>
+      </div>
+      
+      <div>
+        <h4 class="font-serif text-lg mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="/vlogs" class="text-gray-600 hover:text-primary">Vlogs</a></li>
+          <li><a href="/music" class="text-gray-600 hover:text-primary">Music Corner</a></li>
+          <li><a href="/books" class="text-gray-600 hover:text-primary">Book Nook</a></li>
+          <li><a href="/crochet" class="text-gray-600 hover:text-primary">Crochet Projects</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif text-lg mb-4">Connect</h4>
+        <ul class="space-y-2">
+          <li><a href="https://www.instagram.com/_dreyyy.sy_/" class="text-gray-600 hover:text-primary">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@dreysvaults" class="text-gray-600 hover:text-primary">YouTube</a></li>
+          <li><a href="https://open.spotify.com/user/31kot76a7swdv7rgnzezoswe76k4?si=38425b8bb8e5498f" class="text-gray-600 hover:text-primary">Spotify</a></li>
+          <li><a href="https://pin.it/7H0l43tuN" class="text-gray-600 hover:text-primary">Pinterest</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif text-lg mb-4">Newsletter</h4>
+        <form class="space-y-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+          <button
+            type="submit"
+            class="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 transition-opacity"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-600">
+      <p>&copy; {currentYear} Drey's Vault. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

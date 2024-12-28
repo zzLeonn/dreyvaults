@@ -1,0 +1,29 @@
+---
+const categories = [
+  { id: 'daily', name: 'Daily Life', count: 12 },
+  { id: 'travel', name: 'Travel', count: 8 },
+  { id: 'crafts', name: 'Crafting', count: 15 },
+  { id: 'music', name: 'Music Sessions', count: 6 },
+  { id: 'books', name: 'Book Reviews', count: 10 },
+  { id: 'tutorials', name: 'Tutorials', count: 7 },
+];
+---
+
+<div class="bg-white rounded-lg shadow-sm p-6">
+  <h2 class="font-serif text-xl text-gray-800 mb-4">Categories</h2>
+  <ul class="space-y-2">
+    {categories.map(category => (
+      <li>
+        <a
+          href={`/vlogs/category/${category.id}`}
+          class="flex items-center justify-between text-gray-600 hover:text-primary transition-colors"
+        >
+          <span>{category.name}</span>
+          <span class="bg-softGray px-2 py-1 rounded-full text-sm">
+            {category.count}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

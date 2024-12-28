@@ -1,0 +1,36 @@
+---
+import type { SpotifyPlaylist } from '../../utils/spotify';
+
+interface Props {
+  playlist: SpotifyPlaylist;
+}
+
+const { playlist } = Astro.props;
+---
+
+<article class="bg-white rounded-lg shadow-sm overflow-hidden group">
+  <a href={playlist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+    <div class="relative aspect-square">
+      <img
+        src={playlist.images[0]?.url}
+        alt={playlist.name}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <span class="text-white font-medium">Play on Spotify</span>
+      </div>
+    </div>
+    
+    <div class="p-4">
+      <h3 class="font-serif text-lg text-gray-800 mb-2 line-clamp-1">
+        {playlist.name}
+      </h3>
+      <p class="text-sm text-gray-600 line-clamp-2 mb-2">
+        {playlist.description}
+      </p>
+      <span class="text-sm text-primary">
+        {playlist.tracks.total} tracks
+      </span>
+    </div>
+  </a>
+</article>

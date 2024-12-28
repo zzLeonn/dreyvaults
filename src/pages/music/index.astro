@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/common/PageHeader.astro';
+import { Player } from '../../components/music/Player';
+import { PlaylistList } from '../../components/music/PlaylistList';
+---
+
+<Layout title="Music Corner">
+  <div class="pt-24 pb-32">
+    <PageHeader
+      title="Music Corner"
+      description="Discover my curated playlists and musical journey"
+    />
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <PlaylistList client:load />
+    </div>
+  </div>
+  
+  <Player client:load />
+</Layout>

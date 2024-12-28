@@ -1,0 +1,33 @@
+---
+const images = Array.from({ length: 8 }, (_, i) => ({
+  src: `/img/img${i + 1}.jpg`,
+  alt: `Lifestyle photo ${i + 1}`,
+}));
+---
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="font-serif text-4xl text-center text-gray-800 mb-12">
+      Life in Pictures
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {images.map((image) => (
+        <div class="aspect-square rounded-lg overflow-hidden">
+          <img
+            src={image.src}
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        href="/gallery"
+        class="inline-block px-8 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+      >
+        View Gallery
+      </a>
+    </div>
+  </div>
+</section>

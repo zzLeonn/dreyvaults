@@ -1,0 +1,14 @@
+---
+import PlaylistCard from './PlaylistCard.astro';
+import { getPlaylists } from '../../utils/spotify';
+import type { SpotifyPlaylist } from '../../utils/spotify';
+import { getUserPlaylists } from '../../utils/spotify/api';
+
+const playlists: SpotifyPlaylist[] = await getUserPlaylists();
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {playlists.map((playlist) => (
+    <PlaylistCard playlist={playlist} />
+  ))}
+</div>
