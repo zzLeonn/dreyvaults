@@ -14,7 +14,6 @@ export interface SpotifyPlaylist {
   external_urls: { spotify: string };
 }
 
-// No need for a separate refreshAccessToken function as the SDK handles this automatically
 
 export async function getPlaylists(userId: string): Promise<SpotifyPlaylist[]> {
   try {
