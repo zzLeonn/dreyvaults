@@ -38,6 +38,5 @@ export async function getVlogs(): Promise<Vlog[]> {
       date: '2024-03-08',
       category: 'Book Reviews'
     },
-    // Add more vlogs as needed
   ];
 }

@@ -32,4 +32,4 @@ export const usePlayerStore = create<PlayerState>((set) => ({
   setDuration: (duration) => set({ duration }),
   setDevice: (device) => set({ device }),
   setQueue: (queue) => set({ queue })
-}));
+}))
