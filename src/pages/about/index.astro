@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/common/PageHeader.astro';
+import ProfileImage from '../../components/about/ProfileImage.astro';
+import BioSection from '../../components/about/BioSection.astro';
+import SocialLinks from '../../components/about/SocialLinks.astro';
+import Stats from '../../components/about/Stats.astro';
+---
+
+<Layout title="About">
+  <div class="pt-24 pb-12">
+    <PageHeader
+      title="About Me"
+      description="Get to know the person behind Drey's Vault"
+    />
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <ProfileImage
+          src="/placeholder-profile.jpg"
+          alt="Drey's Profile Picture"
+        />
+        
+        <div class="space-y-8">
+          <BioSection />
+          <SocialLinks />
+        </div>
+      </div>
+      
+      <Stats />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Add any page-specific styles here */
+  :root {
+    scroll-behavior: smooth;
+  }
+</style>
