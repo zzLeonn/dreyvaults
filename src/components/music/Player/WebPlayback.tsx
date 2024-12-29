@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { usePlayerStore } from '../../../stores/playerStore';
-import { sdk } from '../../../utils/spotify/auth';
+
+declare global {
+  interface Window {
+    spotifyPlayer: Spotify.Player;
+  }
+}
 
 export const WebPlayback: React.FC = () => {
   const [player, setPlayer] = useState<Spotify.Player | null>(null);
@@ -16,7 +21,8 @@ export const WebPlayback: React.FC = () => {
       const player = new window.Spotify.Player({
         name: "Drey's Vault Web Player",
         getOAuthToken: async (cb) => {
-          const token = await sdk.getAccessToken();
+          // Replace this with your token retrieval logic
+          const token = 'your-token-here';
           cb(token);
         }
       });
@@ -35,11 +41,13 @@ export const WebPlayback: React.FC = () => {
       });
 
       await player.connect();
+      window.spotifyPlayer = player;
       setPlayer(player);
     };
 
     return () => {
       player?.disconnect();
+      script.remove();
     };
   }, []);
 

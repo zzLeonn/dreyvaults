@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/common/PageHeader.astro';
+
+---
+
+<Layout title="Photo Gallery">
+  <div class="pt-24 pb-12">
+    <PageHeader
+      title="Photo Gallery"
+      description="Capturing moments and memories through my lens"
+    />
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div class="aspect-square rounded-lg overflow-hidden">
+            <img
+              src={`/placeholder-${(i % 8) + 1}.jpg`}
+              alt={`Gallery photo ${i + 1}`}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        ))}
+      </div>
+      
+      <div class="mt-12 flex justify-center">
+        <button class="px-8 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+          Load More
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>

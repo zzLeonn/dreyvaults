@@ -2,19 +2,19 @@ import { create } from 'zustand';
 
 interface PlayerState {
   isPlaying: boolean;
-  currentTrack: SpotifyApi.TrackObjectFull | null;
+  currentTrack: Spotify.Track | null;
   volume: number;
   progress: number;
   duration: number;
   device: Spotify.Device | null;
-  queue: SpotifyApi.TrackObjectFull[];
+  queue: Spotify.Track[];
   setIsPlaying: (playing: boolean) => void;
-  setCurrentTrack: (track: SpotifyApi.TrackObjectFull | null) => void;
+  setCurrentTrack: (track: Spotify.Track | null) => void;
   setVolume: (volume: number) => void;
   setProgress: (progress: number) => void;
   setDuration: (duration: number) => void;
   setDevice: (device: Spotify.Device | null) => void;
-  setQueue: (queue: SpotifyApi.TrackObjectFull[]) => void;
+  setQueue: (queue: Spotify.Track[]) => void;
 }
 
 export const usePlayerStore = create<PlayerState>((set) => ({
@@ -32,4 +32,4 @@ export const usePlayerStore = create<PlayerState>((set) => ({
   setDuration: (duration) => set({ duration }),
   setDevice: (device) => set({ device }),
   setQueue: (queue) => set({ queue })
-}))
+}));

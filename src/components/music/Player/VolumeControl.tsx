@@ -1,13 +1,18 @@
 import React from 'react';
 import { usePlayerStore } from '../../../stores/playerStore';
-import { sdk } from '../../../utils/spotify/auth';
 
 export const VolumeControl: React.FC = () => {
   const { volume, setVolume } = usePlayerStore();
 
   const handleVolumeChange = async (newVolume: number) => {
-    setVolume(newVolume);
-    await sdk.player.setVolume(newVolume * 100);
+    try {
+      if (window.spotifyPlayer) {
+        await window.spotifyPlayer.setVolume(newVolume * 100);
+        setVolume(newVolume);
+      }
+    } catch (error) {
+      console.error('Error setting volume:', error);
+    }
   };
 
   return (

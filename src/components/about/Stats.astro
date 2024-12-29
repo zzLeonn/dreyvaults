@@ -1,0 +1,38 @@
+---
+const stats = [
+  { label: 'Vlogs Created', value: '100+' },
+  { label: 'Books Read', value: '50+' },
+  { label: 'Projects Completed', value: '200+' },
+  { label: 'Happy Followers', value: '10K+' }
+];
+---
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12" data-animate>
+  {stats.map((stat, index) => (
+    <div 
+      class="stat-card bg-white p-6 rounded-lg shadow-sm text-center transform hover:-translate-y-1 transition-transform duration-300"
+      style={`animation-delay: ${1 + index * 0.1}s`}
+    >
+      <div class="font-serif text-2xl text-primary">{stat.value}</div>
+      <div class="text-gray-600 text-sm">{stat.label}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stat-card {
+    opacity: 0;
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
