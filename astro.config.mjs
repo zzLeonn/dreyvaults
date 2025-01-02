@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   output: 'server',
+  adapter: vercel(),
   integrations: [tailwind(), react()],
   vite: {
     ssr: {

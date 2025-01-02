@@ -16,6 +16,7 @@
     "@fontsource/inter": "^5.0.17",
     "@fontsource/playfair-display": "^5.0.19",
     "@spotify/web-api-ts-sdk": "^1.2.0",
+    "@vercel/analytics": "^1.4.1",
     "astro": "^4.16.18",
     "debounce": "^2.2.0",
     "googleapis": "^144.0.0",
