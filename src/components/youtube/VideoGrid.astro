@@ -3,11 +3,12 @@ import VideoCard from './Videocard.astro';
 import { fetchYouTubeVideos } from '../../utils/youtube/api';
 import ErrorBoundary from './ErrorBoundary.astro';
 import SkeletonCard from './SkeletonCard.astro';
+import { YouTubeVideo } from '../../utils/youtube';
 
 const videoIds = ['jgSAK3IR3rk', '4mX0aL0MiZY'];
 
-let videos = [];
-let error = null;
+let videos: YouTubeVideo[] = [];
+let error: Error | null = null;
 let loading = true;
 
 try {
