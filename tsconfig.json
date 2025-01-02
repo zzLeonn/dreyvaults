@@ -1,13 +1,18 @@
 {
   "extends": "astro/tsconfigs/base",
-    "compilerOptions": {
-      "strict": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true
-    },
-    "include": [
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "src/spotify.d.ts"
-    ]
-  }
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/spotify.d.ts"
+  ]
+}

@@ -1,29 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/common/PageHeader.astro';
-import VlogGrid from '../../components/vlogs/VlogGrid.astro';
-import VlogCategories from '../../components/vlogs/VlogCategories.astro';
-import SearchBar from '../../components/common/SearchBar.astro';
+import VideoGrid from '../../components/youtube/VideoGrid.astro';
+
 ---
 
 <Layout title="Vlogs">
   <div class="pt-24 pb-12">
     <PageHeader
-      title="Vlogs"
-      description="Join me on my daily adventures and creative journey"
+      title="Latest Videos"
+      description="Join me on my creative journey through life's beautiful moments"
     />
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row gap-8">
-        <aside class="w-full md:w-64">
-          <SearchBar />
-          <VlogCategories />
-        </aside>
-        
-        <main class="flex-1">
-          <VlogGrid />
-        </main>
+      <div class="mt-8">
+        <VideoGrid />
       </div>
     </div>
   </div>
 </Layout>
+
+<style>
+  :root {
+    scroll-behavior: smooth;
+  }
+</style>

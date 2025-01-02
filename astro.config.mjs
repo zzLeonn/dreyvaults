@@ -3,5 +3,16 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 
 export default defineConfig({
+  output: 'server',
   integrations: [tailwind(), react()],
+  vite: {
+    ssr: {
+      noExternal: ['googleapis'],
+    },
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
+    },
+  },
 });

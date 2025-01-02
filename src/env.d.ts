@@ -11,3 +11,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+interface ImportMetaEnv {
+  readonly YOUTUBE_API_KEY: string;
+}
