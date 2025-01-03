@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  ariaLabel: string;
+}
+
+const { title, description, image, href, ariaLabel } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block bg-white rounded-lg shadow-sm overflow-hidden transform-gpu backface-hidden will-change-transform transition-all duration-250 ease-out hover:scale-103 hover:shadow-lg hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+  role="link"
+  aria-label={ariaLabel}
+>
+  <div class="relative aspect-[4/3]">
+    <img
+      src={image}
+      alt=""
+      class="w-full h-full object-cover transform-gpu transition-transform duration-250 ease-out group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="p-6">
+    <h3 class="font-serif text-xl text-gray-800 mb-2">{title}</h3>
+    <p class="text-gray-600">{description}</p>
+  </div>
+</a>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  a {
+    animation: fadeIn 300ms ease-out forwards;
+    opacity: 0;
+  }
+
+  a:active {
+    transform: scale(0.98) translateY(2px);
+  }
+
+  .scale-103 {
+    --tw-scale-x: 1.03;
+    --tw-scale-y: 1.03;
+  }
+</style>

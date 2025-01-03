@@ -1,0 +1,49 @@
+---
+import FeaturedCard from './FeaturedCard.astro';
+
+const featuredItems = [
+  {
+    title: 'Latest Playlist',
+    description: 'Discover my current favorite tunes and musical inspirations.',
+    image: '/public/img/playlist.jpg',
+    href: '/music',
+    ariaLabel: 'View latest music playlist'
+  },
+  {
+    title: 'Recent Reads',
+    description: 'Explore my latest book recommendations and reviews.',
+    image: '/public/img/book.jpg',
+    href: '/books',
+    ariaLabel: 'Browse recent book reviews'
+  },
+  {
+    title: 'Crochet Creation',
+    description: 'Check out my newest crochet projects and patterns.',
+    image: '/public/img/crochet2.jpg',
+    href: '/crochet',
+    ariaLabel: 'View latest crochet projects'
+  }
+];
+---
+
+<section class="py-20 bg-softGray" aria-label="Featured content">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="font-serif text-4xl text-center text-gray-800 mb-12">Featured Content</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {featuredItems.map((item, index) => (
+        <div style={`animation-delay: ${index * 100}ms`}>
+          <FeaturedCard {...item} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Ensure smooth animations */
+  section {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+</style>
