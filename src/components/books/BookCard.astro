@@ -1,0 +1,55 @@
+---
+import type { Book } from '../types/booktype';
+
+interface Props {
+  book: Book;
+}
+
+const { book } = Astro.props;
+---
+
+<a
+  href={book.externalUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="book-card block relative w-[220px] h-[320px] rounded-xl overflow-hidden transform-gpu backface-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+  aria-label={`View ${book.title} details`}
+>
+  <img
+    src={book.coverUrl}
+    alt={`Cover of ${book.title}`}
+    class="w-full h-full object-cover"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+    <div class="absolute bottom-4 left-4 right-4">
+      <h3 class="text-white font-medium line-clamp-2">{book.title}</h3>
+    </div>
+  </div>
+</a>
+
+<style>
+  .book-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (hover: hover) {
+    .book-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      filter: brightness(1.05);
+    }
+  }
+
+  @media (hover: none) {
+    .book-card:active {
+      transform: scale(0.98);
+    }
+  }
+</style>

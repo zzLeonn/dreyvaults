@@ -17,12 +17,14 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Drey's Vault - Lifestyle, Music, Books & Crochet" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#FFB6C1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title} | Drey's Vault</title>
   </head>
   
-  <body class="bg-white font-sans">
+  <body class="bg-white font-sans antialiased">
     <Header />
     <main>
       <slot />
@@ -32,6 +34,7 @@ const { title } = Astro.props;
   </body>
 </html>
 
+
 <style is:global>
   :root {
     --swiper-theme-color: #FFB6C1;
@@ -39,10 +42,32 @@ const { title } = Astro.props;
   
   html {
     scroll-behavior: smooth;
+    touch-action: manipulation;
   }
 
   body {
     min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Improve tap target sizes on mobile */
+  @media (max-width: 768px) {
+    button, a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Remove hover effects on touch devices */
+  @media (hover: none) {
+    a:hover, button:hover {
+      transform: none !important;
+    }
+  }
+
+  /* Improve scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
   }
 </style>
 
