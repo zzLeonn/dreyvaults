@@ -1,4 +1,6 @@
 ---
+
+import { MobileMenu } from './MobileMenu';
 const navItems = [
   { href: '/vlogs', label: 'Vlogs' },
   { href: '/music', label: 'Music Corner' },
@@ -29,13 +31,51 @@ const navItems = [
       </nav>
 
       <button
-        class="md:hidden text-gray-600 hover:text-primary"
-        aria-label="Menu"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
+      id="menuButton"
+      class="md:hidden p-2 text-gray-600 hover:text-primary"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
   </div>
+</div>
 </header>
+
+<div id="mobileMenu" class="hidden">
+<MobileMenu client:load isOpen={false} onClose={() => {}} navItems={navItems} />
+</div>
+
+<script>
+let isMenuOpen = false;
+
+function toggleMenu() {
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  if (!menuButton || !mobileMenu) return;
+  
+  isMenuOpen = !isMenuOpen;
+  menuButton.setAttribute('aria-expanded', isMenuOpen.toString());
+  mobileMenu.classList.toggle('hidden', !isMenuOpen);
+}
+
+// Add event listener
+document.addEventListener('DOMContentLoaded', () => {
+  const menuButton = document.getElementById('menuButton');
+  if (menuButton) {
+    menuButton.addEventListener('click', toggleMenu);
+  }
+});
+</script>
+
+<style>
+@media (hover: hover) {
+  a:hover {
+    transform: translateY(-1px);
+  }
+}
+</style>
