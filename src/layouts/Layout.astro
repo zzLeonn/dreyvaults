@@ -1,16 +1,15 @@
 ---
 import '@fontsource/playfair-display';
 import '@fontsource/inter';
+import { Analytics } from '@vercel/analytics/react';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { inject } from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-inject();
 ---
 
 <!doctype html>
@@ -29,6 +28,7 @@ inject();
       <slot />
     </main>
     <Footer />
+    <Analytics />
   </body>
 </html>
 
@@ -45,3 +45,4 @@ inject();
     min-height: 100vh;
   }
 </style>
+
