@@ -3,7 +3,7 @@ import VideoCard from './Videocard.astro';
 import { fetchYouTubeVideos } from '../../utils/youtube/api';
 import ErrorBoundary from './ErrorBoundary.astro';
 import SkeletonCard from './SkeletonCard.astro';
-import { YouTubeVideo } from '../../utils/youtube';
+import type { YouTubeVideo } from '../types/youtube';
 
 const videoIds = ['jgSAK3IR3rk', '4mX0aL0MiZY'];
 
@@ -17,20 +17,21 @@ try {
 } catch (e) {
   error = e instanceof Error ? e : new Error('An unknown error occurred');
   loading = false;
-  console.error('Error in VideoGrid:', e);
+  console.error('Error in VideoGrid:', error);
 }
 ---
 
 <ErrorBoundary error={error}>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     {loading ? (
-      Array(videoIds.length).fill(null).map(() => (
-        <SkeletonCard />
+      Array(videoIds.length).fill(null).map((_, index) => (
+        <SkeletonCard key={index} />
       ))
     ) : (
       videos.map(video => (
-        <VideoCard video={video} />
+        <VideoCard video={video} key={video.id} />
       ))
     )}
   </div>
 </ErrorBoundary>
+
