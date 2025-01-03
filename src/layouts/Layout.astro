@@ -3,15 +3,14 @@ import '@fontsource/playfair-display';
 import '@fontsource/inter';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Analytics from '@vercel/analytics/astro'
+import { inject } from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-
-
+inject();
 ---
 
 <!doctype html>
@@ -23,6 +22,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title} | Drey's Vault</title>
   </head>
+  
   <body class="bg-white font-sans">
     <Header />
     <main>
