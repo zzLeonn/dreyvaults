@@ -1,4 +1,4 @@
-Drey's Vault
+🌸 Drey's Vault
 
 Welcome to Drey's Vault, a cozy corner of the internet where life, art, and passions come together. This personal website is a reflection of a vlogger's journey, showcasing everything from music playlists and book recommendations to handmade crochet designs and an online store.
 
@@ -30,13 +30,25 @@ The website features a warm and fresh design, offering a welcoming experience th
 
 💻 Tech Stack
 
-Frontend: HTML, CSS (with Tailwind), JavaScript
+Category
 
-Backend: Node.js
+Technology
 
-Deployment: Vercel
+Frontend
 
-Analytics: Vercel Analytics
+HTML, CSS (Tailwind), JavaScript
+
+Backend
+
+Node.js
+
+Deployment
+
+Vercel
+
+Analytics
+
+Vercel Analytics
 
 🛠️ Installation
 
@@ -66,15 +78,23 @@ http://localhost:3000
 
 Contributions are welcome! If you have ideas for new features or improvements, feel free to fork the repository and submit a pull request.
 
-Fork the project
+Steps to Contribute:
 
-Create your feature branch: git checkout -b feature/YourFeature
+Fork the project.
 
-Commit your changes: git commit -m 'Add some feature'
+Create your feature branch:
 
-Push to the branch: git push origin feature/YourFeature
+git checkout -b feature/YourFeature
 
-Open a pull request
+Commit your changes:
+
+git commit -m 'Add some feature'
+
+Push to the branch:
+
+git push origin feature/YourFeature
+
+Open a pull request.
 
 📄 License
 
@@ -96,4 +116,5 @@ Email: your-email@example.com
 
 Instagram: @dreysvault
 
-Thank you for visiting Drey's Vault. Your support and love make this journey even more special. 🌸
+Thank you for visiting Drey's Vault. Your support and love make this journey even more special. 💖
+
