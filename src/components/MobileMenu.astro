@@ -1,0 +1,86 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems: NavItem[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<div id="mobileMenu" class="fixed inset-0 z-50 lg:hidden overflow-hidden hidden" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" aria-hidden="true"></div>
+  
+  <div class="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white shadow-xl">
+    <div class="flex justify-end p-4">
+      <button
+        id="closeMenuButton"
+        class="p-2 rounded-full text-gray-600 hover:text-primary hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+        aria-label="Close menu"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <nav class="px-4 py-2">
+      {navItems.map((item, index) => (
+        <a
+          href={item.href}
+          class="block py-4 text-lg text-gray-600 hover:text-primary transition-colors touch-manipulation border-b border-gray-100 last:border-b-0"
+          data-index={index}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</div>
+
+<script>
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenuButton = document.getElementById('closeMenuButton');
+
+  function closeMobileMenu() {
+    if (mobileMenu) {
+      mobileMenu.classList.add('hidden');
+      document.dispatchEvent(new CustomEvent('menu-closed'));
+    }
+  }
+
+  if (closeMenuButton) {
+    closeMenuButton.addEventListener('click', closeMobileMenu);
+  }
+
+  // Close menu when clicking outside
+  mobileMenu?.addEventListener('click', (event) => {
+    if (event.target === mobileMenu) {
+      closeMobileMenu();
+    }
+  });
+
+  // Add animation to menu items
+  const menuItems = mobileMenu?.querySelectorAll('a');
+  menuItems?.forEach((item) => {
+    const index = parseInt(item.getAttribute('data-index') || '0');
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+
+  // Close menu on escape key press
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMobileMenu();
+    }
+  });
+</script>
+

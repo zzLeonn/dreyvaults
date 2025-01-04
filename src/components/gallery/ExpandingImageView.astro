@@ -1,0 +1,55 @@
+---
+interface Props {
+  images: {
+    id: number;
+    src: string;
+    alt: string;
+  }[];
+}
+
+const { images } = Astro.props;
+---
+
+<div id="expanded-image-view" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center">
+  <button id="close-expanded-view" class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 focus:outline-none" aria-label="Close expanded view">
+    &times;
+  </button>
+  <button id="prev-image" class="absolute left-4 text-white text-6xl opacity-75 hover:opacity-100 focus:outline-none" aria-label="Previous image">
+    &#8249;
+  </button>
+  <button id="next-image" class="absolute right-4 text-white text-6xl opacity-75 hover:opacity-100 focus:outline-none" aria-label="Next image">
+    &#8250;
+  </button>
+  <img id="expanded-image" src="/placeholder.svg" alt="" class="max-h-[90vh] max-w-[90vw] object-contain" />
+</div>
+
+<style>
+  #expanded-image-view {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #expanded-image {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #expanded-image-view.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #expanded-image-view:not(.hidden) #expanded-image {
+    animation: zoomIn 0.3s ease-out;
+  }
+
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+

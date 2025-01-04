@@ -1,7 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/common/PageHeader.astro';
+import { Image } from 'astro:assets';
+import ExpandedImageView from '..//..//components/gallery/ExpandingImageView.astro';
 
+// Simulate a larger image set
+const allImages = Array.from({ length: 30 }, (_, i) => ({
+  id: i + 1,
+  src: `/gallery/g${(i % 12) + 1}.jpeg`,
+  alt: `Gallery photo ${i + 1}`
+}));
+
+const initialImageCount = 12;
+const imagesPerLoad = 8;
 ---
 
 <Layout title="Photo Gallery">
@@ -12,23 +23,159 @@ import PageHeader from '../../components/common/PageHeader.astro';
     />
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div class="aspect-square rounded-lg overflow-hidden">
-            <img
-              src={`/placeholder-${(i % 8) + 1}.jpg`}
-              alt={`Gallery photo ${i + 1}`}
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {allImages.slice(0, initialImageCount).map((image, index) => (
+          <div 
+            class="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out gallery-item cursor-pointer"
+            style={`animation-delay: ${index * 100}ms`}
+            data-image-id={image.id}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={500}
+              height={500}
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 ease-in-out"
             />
           </div>
         ))}
       </div>
       
       <div class="mt-12 flex justify-center">
-        <button class="px-8 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+        <button 
+          id="load-more"
+          class="px-8 py-3 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+        >
           Load More
         </button>
       </div>
     </div>
   </div>
+
+  <ExpandedImageView images={allImages} />
 </Layout>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gallery-item {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  let currentImageCount = 12;
+  const imagesPerLoad = 8;
+  const totalImages = 30;
+
+  function createImageElement(index) {
+    const div = document.createElement('div');
+    div.className = 'aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out gallery-item cursor-pointer';
+    div.style.animationDelay = `${(index % imagesPerLoad) * 100}ms`;
+    div.dataset.imageId = (index + 1).toString();
+
+    const img = document.createElement('img');
+    img.src = `/gallery/g${(index % 12) + 1}.jpeg`;
+    img.alt = `Gallery photo ${index + 1}`;
+    img.className = 'w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 ease-in-out';
+    img.width = 500;
+    img.height = 500;
+
+    div.appendChild(img);
+    return div;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const galleryGrid = document.getElementById('gallery-grid');
+    const loadMoreButton = document.getElementById('load-more');
+    const expandedView = document.getElementById('expanded-image-view');
+    const expandedImage = document.getElementById('expanded-image');
+    const closeButton = document.getElementById('close-expanded-view');
+    const prevButton = document.getElementById('prev-image');
+    const nextButton = document.getElementById('next-image');
+
+    let currentExpandedImageId = 0;
+
+    function openExpandedView(imageId) {
+      currentExpandedImageId = imageId;
+      const imageSrc = `/gallery/g${(imageId - 1) % 12 + 1}.jpeg`;
+      expandedImage.src = imageSrc;
+      expandedImage.alt = `Gallery photo ${imageId}`;
+      expandedView.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeExpandedView() {
+      expandedView.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function navigateImage(direction) {
+      currentExpandedImageId = (currentExpandedImageId + direction + totalImages) % totalImages || totalImages;
+      openExpandedView(currentExpandedImageId);
+    }
+
+    galleryGrid.addEventListener('click', (e) => {
+      const galleryItem = e.target.closest('.gallery-item');
+      if (galleryItem) {
+        const imageId = parseInt(galleryItem.dataset.imageId);
+        openExpandedView(imageId);
+      }
+    });
+
+    closeButton.addEventListener('click', closeExpandedView);
+    prevButton.addEventListener('click', () => navigateImage(-1));
+    nextButton.addEventListener('click', () => navigateImage(1));
+
+    loadMoreButton?.addEventListener('click', () => {
+      const fragment = document.createDocumentFragment();
+
+      for (let i = currentImageCount; i < currentImageCount + imagesPerLoad && i < totalImages; i++) {
+        fragment.appendChild(createImageElement(i));
+      }
+
+      galleryGrid?.appendChild(fragment);
+      currentImageCount += imagesPerLoad;
+
+      if (currentImageCount >= totalImages) {
+        loadMoreButton.classList.add('opacity-50', 'cursor-not-allowed');
+        loadMoreButton.setAttribute('disabled', 'true');
+      }
+    });
+
+    // Close expanded view when clicking outside the image
+    expandedView.addEventListener('click', (e) => {
+      if (e.target === expandedView) {
+        closeExpandedView();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!expandedView.classList.contains('hidden')) {
+        switch (e.key) {
+          case 'ArrowLeft':
+            navigateImage(-1);
+            break;
+          case 'ArrowRight':
+            navigateImage(1);
+            break;
+          case 'Escape':
+            closeExpandedView();
+            break;
+        }
+      }
+    });
+  });
+</script>
+
