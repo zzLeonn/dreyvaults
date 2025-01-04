@@ -15,7 +15,7 @@ If you discover a security issue in **Drey's Vault**, please report it to us con
 
 ### How to Report
 
-- Email: [sezinthantkaung@gmail.com](mailto:zinthantkaung@gmail.com)
+- Email: [zinthantkaung@gmail.com](mailto:zinthantkaung@gmail.com)
 - Subject: **Security Vulnerability Report**
 
 ### Guidelines for Reporting
